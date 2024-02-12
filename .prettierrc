@@ -1,0 +1,16 @@
+{
+  "singleQuote": false,
+  "semi": false,
+  "trailingComma": "es5",
+  "tabWidth": 4,
+  "printWidth": 120,
+  "arrowParens": "avoid",
+  "overrides": [
+    {
+      "files": "src/utils/locale/*",
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}
