@@ -10,33 +10,33 @@ precacheAndRoute(self.__WB_MANIFEST)
 
 registerRoute(
     ({ url }) => url.pathname.includes(".svg"),
-    new NetworkFirst({
+    new CacheFirst({
         cacheName: "svg",
     })
 )
 
-// registerRoute(
-//     ({ url }) => url.href === "https://api.sampleapis.com/coffee/hot",
-//     async ({ url, request, event, params }) => {
-//         const response = await fetch(request)
-//         const responseBody = await response.text()
-//         return new Response(JSON.stringify({ test: "abc" }), {
-//             headers: response.headers,
-//         })
-//     }
-// )
+registerRoute(
+    ({ url }) => url.href === "https://api.sampleapis.com/coffee/hot",
+    async ({ url, request, event, params }) => {
+        const response = await fetch(request)
+        const responseBody = await response.text()
+        return new Response(JSON.stringify({ test: "abc" }), {
+            headers: response.headers,
+        })
+    }
+)
 
-// registerRoute(
-//     ({ url }) => url.pathname === "/" || url.pathname.includes(".js") || url.pathname.includes(".css"),
-//     new NetworkFirst({
-//         cacheName: "static",
-//     })
-// )
+registerRoute(
+    ({ url }) => url.pathname === "/" || url.pathname.includes(".js") || url.pathname.includes(".css"),
+    new NetworkFirst({
+        cacheName: "static",
+    })
+)
 
-// setDefaultHandler(new NetworkOnly())
-// offlineFallback({
-//     pageFallback: "./offline.html",
-// })
+setDefaultHandler(new NetworkOnly())
+offlineFallback({
+    pageFallback: "./offline.html",
+})
 
 self.skipWaiting()
 clientsClaim()
